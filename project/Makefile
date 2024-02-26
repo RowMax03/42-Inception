@@ -6,7 +6,7 @@
 #    By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/20 20:42:59 by mreidenb          #+#    #+#              #
-#    Updated: 2024/02/20 21:11:24 by mreidenb         ###   ########.fr        #
+#    Updated: 2024/02/22 16:06:08 by mreidenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,14 +37,16 @@ $(ENV):
 	@read -p "Enter DB_HOSTNAME: " value; echo DB_HOSTNAME=$$value >> $(ENV)
 	@read -p "Enter DB_USER: " value; echo DB_USER=$$value >> $(ENV)
 	@read -s -p "Enter DB_PASSWORD: " value; echo DB_PASSWORD=$$value >> $(ENV)
+	@read -s -p "Enter DB_ROOT_PW: " value; echo DB_ROOT_PW=$$value >> $(ENV)
 
 fclean:
 	@rm -rf $(HOME)/data/wordpress_db
 	@rm -rf $(HOME)/data/wordpress_files
-	@rm -f $(ENV)
-	#@docker system prune --all --force --volumes
-	#@docker volume prune --force
-	#@docker network prune --force
+	rm -rf  ${HOME}/${USER}/data/mariadb
+	#@rm -f $(ENV)
+	@docker system prune --all --force --volumes
+	@docker volume prune --force
+	@docker network prune --force
 	@if [ "`docker volume ls -q`" ]; then \
 		docker volume rm `docker volume ls -q`; \
 	fi

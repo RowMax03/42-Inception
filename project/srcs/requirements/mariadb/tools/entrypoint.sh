@@ -21,17 +21,24 @@ if service mariadb start; then
 
 	# Create the database
 	# Delete Standard Database
-	mariadb -u root -p$DB_PASSWORD -e "DROP DATABASE IF EXISTS test;"
+	mariadb -u root -p$DB_ROOT_PW -e "DROP DATABASE IF EXISTS test;"
 	# Create the database if it doesn't exist
-	mariadb -u root -p$DB_PASSWORD -e "CREATE DATABASE IF NOT EXISTS wordpress;"
+	mariadb -u root -p$DB_ROOT_PW -e "CREATE DATABASE IF NOT EXISTS $DB_DATABASE;"
 	# Create the user if it doesn't exist and grant all privileges
-	mariadb -u root -p$DB_PASSWORD -e "CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_USER';"
-	mariadb -u root -p$DB_PASSWORD -e "GRANT ALL PRIVILEGES ON $DB_DATABASE.* TO '$DB_USER'@'%';"
-	mariadb -u root -p$DB_PASSWORD -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$DB_PASSWORD';"
-	mariadb -u root -p$DB_PASSWORD -e "FLUSH PRIVILEGES;"
-	mariadb -u root -p$DB_PASSWORD -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY '$DB_PASSWORD' WITH GRANT OPTION; FLUSH PRIVILEGES;"
+	mariadb -u root -p$DB_ROOT_PW -e "CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD';"
+	mariadb -u root -p$DB_ROOT_PW -e "GRANT ALL ON $DB_DATABASE.* TO '$DB_USER'@'%';"
+	mariadb -u root -p$DB_ROOT_PW -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$DB_ROOT_PW';"
+	mariadb -u root -p$DB_ROOT_PW -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY '$DB_ROOT_PW' WITH GRANT OPTION; FLUSH PRIVILEGES;"
 
-	if mysqladmin -u root -p$DB_PASSWORD shutdown; then
+	# Import Database
+	if [ -f /tmp/wordpress.sql ]; then
+		mariadb -uroot -p$DB_ROOT_PW $DB_DATABASE < /tmp/wordpress.sql
+		echo "Database imported"
+	else
+		echo "Database not imported"
+	fi
+
+	if mysqladmin -u root -p$DB_ROOT_PW shutdown; then
 		echo "MariaDB stopped"
 	else
 		echo "MariaDB failed to stop"

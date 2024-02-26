@@ -32,5 +32,13 @@ Tasks:
 
 	CONTAINER NEED TO RESTART IN CASE OF CRASH
 
+wp Users:
 
+admin:
+mreidenb
+mreidenb42
+
+test:
+test
+test123
 
