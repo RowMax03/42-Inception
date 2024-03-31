@@ -40,6 +40,8 @@ services:
         networks:
             - incept_network
         init: true
+        depends_on:
+          - mariadb
 
 volumes:
     mariadb_data:
