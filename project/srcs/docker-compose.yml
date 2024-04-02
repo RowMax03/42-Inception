@@ -23,7 +23,7 @@ services:
             - .env
         restart: always
         volumes:
-            - ${HOME}/${USER}/data/mariadb:/var/lib/mysql
+            - mariadb_data:/var/lib/mysql
         networks:
             - incept_network
         init: true
@@ -36,7 +36,7 @@ services:
             - .env
         restart: always
         volumes:
-            - ${HOME}/${USER}/data/wordpress:/var/www/html
+            - wordpress_data:/var/www/html
         networks:
             - incept_network
         init: true
