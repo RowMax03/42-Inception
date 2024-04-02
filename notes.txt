@@ -42,3 +42,10 @@ test:
 test
 test123
 
+login to database:
+docker exec -it mariadb mysql -p
+PW: $DB_ROOT_PW
+
+Veify Db:
+USE $DB_DATABSE;
+SHOW TABLES;
