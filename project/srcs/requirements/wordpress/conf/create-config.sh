@@ -7,7 +7,7 @@ until mysql -h"mariadb" -u"$DB_USER" -p"$DB_PASSWORD" -e 'SELECT 1'; do
 done
 
 ## Create wp-config.php
-#wp config create --dbname="$DB_DATABASE" --dbuser="$DB_USER" --dbpass="$DB_PASSWORD" --dbhost="mariadb" --allow-root
+wp config create --dbname="$DB_DATABASE" --dbuser="$DB_USER" --dbpass="$DB_PASSWORD" --dbhost="mariadb" --allow-root
 
 # Set WordPress environment variables
 wp config set USE_PERSISTENT_CONNECTION false --raw --type=constant --allow-root
