@@ -37,5 +37,6 @@ wp config set DB_USER $DB_USER --type=constant --allow-root
 wp config set DB_PASSWORD $DB_PASSWORD --type=constant --allow-root
 wp config set DB_HOST mariadb --type=constant --allow-root
 #mv /var/www/html/wp-config.php /var/www/html/wordpress/wp-config.php
+fi
 
 exec "$@"
