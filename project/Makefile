@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+         #
+#    By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/20 20:42:59 by mreidenb          #+#    #+#              #
-#    Updated: 2024/03/30 19:42:15 by mreidenb         ###   ########.fr        #
+#    Updated: 2024/04/03 15:01:50 by mreidenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ fclean:
 	@rm -rf $(HOME)/data/wordpress_db
 	@rm -rf $(HOME)/data/wordpress_files
 	rm -rf  ${HOME}/${USER}/data/mariadb
-	#@rm -f $(ENV)
+	@rm -f $(ENV)
 	@docker system prune --all --force --volumes
 	@docker volume prune --force
 	@docker network prune --force
